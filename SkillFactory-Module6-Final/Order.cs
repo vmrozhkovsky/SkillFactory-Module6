@@ -9,14 +9,16 @@ namespace SkillFactory_Module6_Final
     public class Order
     {
         public int id;
-
+        Basket basket = new Basket();
     }
     public class Basket
     {
-        public Basket(int productcol)
+        static int ProductCount = 0;
+        int[] ProductIdArray = new int[] { };
+        public void NewProduct(int productId)
         {
-            string[] ProductArray = new string[productcol];
+            ProductCount++;
+            ProductIdArray[ProductCount] = productId;
         }
-        public int ProductCol;
     } 
 }

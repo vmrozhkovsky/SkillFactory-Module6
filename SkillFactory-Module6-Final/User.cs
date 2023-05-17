@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace SkillFactory_Module6_Final
 {
+    //Абстрактный класс User. Для демонстрации обобщения классов и методов предполагается, что из формы регистрации пользователя в качестве пароля может прийти string или int. 
     abstract class User<TPassword>
     {
         private int age;
@@ -17,8 +18,8 @@ namespace SkillFactory_Module6_Final
             }
             set 
             {
-                if (value > 16) age = value;
-                else Console.WriteLine("Вы не можете сделать покупку в нашем магазине, т.к. вам нет 16 лет.");
+                if (value > 18) age = value;
+                else Console.WriteLine("Вы не можете сделать покупку в нашем магазине, т.к. вам нет 18 лет.");
             }
         }
         protected TPassword UserPassword
@@ -41,28 +42,32 @@ namespace SkillFactory_Module6_Final
             this.UserPassword = password;
             this.UserAge = age;
         }
-        protected void ChangeUserPassword()
+        protected virtual void ChangeUserPassword(TPassword newPassword)
         {
-
+            this.UserPassword = newPassword;
         }
     }
 
     class Admin<T> : User<T>
     {
         public static int AdminPasswordMinLength = 8;
-        public Admin(string name, string lastname, string email, string phone, string password, int age) : base(name, lastname, email, phone, password, age)
+        public Admin(string name, string lastname, string email, string phone, T password, int age) : base(name, lastname, email, phone, password, age)
         {
-            if (UserPassword is string userPasswordString)
+            if (CheckPassword(password))
             {
-                if (userPasswordString.Length < AdminPasswordMinLength)
-                {
-                    Console.WriteLine("Слишком короткий пароль администратора. Должен содержать более 8 символов.");
-                }
+                Console.WriteLine("Пользователь создан");
             }
-            else
-            {
-                Console.WriteLine("Для администратора нельзя использовать цифровой пароль");
-            }
+            //if (UserPassword is string userPasswordString)
+            //{
+            //    if (userPasswordString.Length < AdminPasswordMinLength)
+            //    {
+            //        Console.WriteLine("Слишком короткий пароль администратора. Должен содержать более 8 символов.");
+            //    }
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Для администратора нельзя использовать цифровой пароль");
+            //}
         }
 
         public override int UserAge
@@ -76,17 +81,63 @@ namespace SkillFactory_Module6_Final
                 if (value > 21) base.UserAge = value;
                 else Console.WriteLine("Администратор должен быть старше 21 года.");
             }
+
+        }
+
+        protected override void ChangeUserPassword(T newPassword)
+        {
+            if (CheckPassword(newPassword))
+            {
+                base.ChangeUserPassword(newPassword);
+                Console.WriteLine("Пароль администратора изменен.");
+            }
+            //if (newPassword is string userPasswordString)
+            //{
+            //    if (userPasswordString.Length < AdminPasswordMinLength)
+            //    {
+            //        Console.WriteLine("Слишком короткий пароль администратора. Должен содержать более 8 символов.");
+            //    }
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Для администратора нельзя использовать цифровой пароль");
+            //}
+        }
+        private bool CheckPassword(T password)
+        {
+            if (password is string userPasswordString)
+            {
+                if (userPasswordString.Length < AdminPasswordMinLength)
+                {
+                    Console.WriteLine("Слишком короткий пароль администратора. Должен содержать более 8 символов.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Для администратора нельзя использовать цифровой пароль");
+            }
+            return true;
         }
 
     }
 
-    class Bayer : User
+    class Bayer<T> : User<T>
     {
-        public static int AdminPasswordMinLength = 8;
-        public int ProductCol;
-        public Bayer(string name, string lastname, string email, string phone, string password, int age, int productcol) : base(name, lastname, email, phone, password, age)
+        Order order = null;
+        public Bayer(string name, string lastname, string email, string phone, T password, int age, int productcol) : base(name, lastname, email, phone, password, age)
         {
 
+        }
+        public void AddProduct(int productId)
+        {
+            if (order == null) 
+            { 
+                Order order = new Order();
+            }
+            else
+            {
+
+            }
         }
 
     }
