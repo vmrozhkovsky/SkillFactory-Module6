@@ -30,28 +30,4 @@ namespace SkillFactory_Module6_Final
             basket.DeleteProduct(productId);
         }
     }
-    public class Basket
-    {
-        static int ProductCount = 0;
-        List<int> Products = new List<int>();
-
-        public void NewProduct(int productId)
-        {
-            ProductCount++;
-            Products.Add(productId);
-            //foreach(var item in Products)
-            //{
-            //    Console.WriteLine(item);
-            //}
-        }
-        public void DeleteProduct(int productId)
-        {
-            Products.Remove(productId);
-            ProductCount--;
-        }
-    }
-    public class Delivery
-    {
-        
-    }
 }
