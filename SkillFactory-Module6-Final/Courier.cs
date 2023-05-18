@@ -6,16 +6,21 @@ using System.Threading.Tasks;
 
 namespace SkillFactory_Module6_Final
 {
-    public class Courier<T> : User<T>
+    //Класс для создания списка курьеров
+    public class Courier
     {
-        public Courier(string login, string name, T password, int age, string address) : base(login, name, password, age, address)
+        static List<string> Couriers;
+        public string CourierName;
+
+        static Courier()
         {
-            Console.WriteLine("Пользователь создан");
+            List<string> Couriers = new List<string>() { "Courier1", "Courier2", "Courier3" };
         }
 
-        public Courier(string login, T password) : base(login, password)
+        public Courier(int courierNumber)
         {
-            Console.WriteLine("Для курьера не доступно создание простого пользователя. Заполните все поля.");
+            CourierName = Couriers[courierNumber];
+            Couriers.Remove(CourierName);
         }
     }
 }

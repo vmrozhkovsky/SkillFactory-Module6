@@ -11,6 +11,7 @@ namespace SkillFactory_Module6_Final
     {
         Order UserOrder = null;
         private int OrderId = 1;
+
         public Bayer(string login, string name, T password, int age, string address) : base(login, name, password, age, address)
         {
             Console.WriteLine("Пользователь создан");
@@ -53,6 +54,5 @@ namespace SkillFactory_Module6_Final
             base.ChangeUserPassword(newPassword);
             Console.WriteLine("Пароль пользователя изменен.");
         }
-
     }
 }

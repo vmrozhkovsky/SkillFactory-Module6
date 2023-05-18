@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace SkillFactory_Module6_Final
 {
-    //Класс доставки создан для демонстрации агрегации. 
+    //Класс доставки создан для демонстрации агрегации. Использует класс Courier. 
     public class Delivery
     {
-        private Courier<string> OrderCourier;
         private string DeliveryName;
         private string DeliveryAddress;
-        private string DeliveryDescription;
+        private Courier OrderCourier;
         public enum DeliveryType
         {
             HomeDelivery,
@@ -20,26 +19,19 @@ namespace SkillFactory_Module6_Final
             Pickup
         }
 
-        public Delivery(string name, string address, DeliveryType deliverytype, Courier<string> courier)
+        public Delivery(string name, string address, DeliveryType deliverytype, Courier courier)
         {
             this.OrderCourier = courier;
             this.DeliveryName = name;
             this.DeliveryAddress = address;
             if (!(deliverytype == DeliveryType.Pickup) ) 
             {
-                Console.WriteLine("Тип доставки {0}, имя курьера - {1}", deliverytype, OrderCourier.UserName);
+                Console.WriteLine("Тип доставки {0}, имя курьера - {1}", deliverytype, OrderCourier.CourierName);
             }
             else
             {
-                Console.WriteLine("Выбран самолвывоз.");
+                Console.WriteLine("Выбран самовывоз.");
             }
         }
-        
-        public Delivery(string name, Courier<string> courier)
-        {
-            this.OrderCourier = courier;
-            this.DeliveryName = name;
-        }
-
     }
 }

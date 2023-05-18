@@ -15,11 +15,8 @@ namespace SkillFactory_Module6_Final
         {
             ProductCount++;
             Products.Add(productId);
-            //foreach(var item in Products)
-            //{
-            //    Console.WriteLine(item);
-            //}
         }
+
         public void DeleteProduct(int productId)
         {
             Products.Remove(productId);
